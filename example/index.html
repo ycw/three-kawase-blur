@@ -81,7 +81,9 @@
     const btn = tweakpane.addButton({ title: 'update' });
 
     function handleKernelsInputChange() {
-      if (params.kernels.trim().length === 0) return;
+      if (params.kernels.trim().length === 0) {
+        return kawaseBlurPass.setKernels([]);
+      }
       const kernels = [];
       if (params.kernels.split(',').every(x => {
         const y = Number.parseInt(x, 10);
