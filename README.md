@@ -10,7 +10,7 @@ Kawase blur pass for threejs postprocessing.
 
 via cdn
 
-https://cdn.jsdelivr.net/gh/ycw/three-kawase-blur@{VERSION}/src/KawaseBlurPassGen.js
+https://cdn.jsdelivr.net/gh/ycw/three-kawase-blur@{VERSION}/src/index.js
 
 via npm
 
@@ -38,7 +38,7 @@ const KawaseBlurPass = KawaseBlurPassGen({
 
 // Create KawaseBlurPass instance
 const myKawaseBlurPass = new KawaseBlurPass({ 
-  renderer, kernels: [0,1,2,2,3] 
+  renderer, kernels: [0, 1, 2, 2, 3] 
 });
 
 // Add to EffectComposer 
