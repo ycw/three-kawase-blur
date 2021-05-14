@@ -67,7 +67,7 @@
 
     // ---- effect composer
 
-    const KawaseBlurPass = KawaseBlurPassGen({ THREE, EffectComposer, Pass, FullScreenQuad, CopyShader});
+    const KawaseBlurPass = KawaseBlurPassGen({ THREE, EffectComposer, Pass, FullScreenQuad, CopyShader });
     const kawaseBlurPass = new KawaseBlurPass({ renderer, kernels: [0, 1, 2, 2, 3] });
 
     const fx = new EffectComposer(renderer);
