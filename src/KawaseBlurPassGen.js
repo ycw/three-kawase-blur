@@ -13,7 +13,6 @@ export function KawaseBlurPassGen({ THREE, EffectComposer, Pass, FullScreenQuad,
         uniforms,
         vertexShader: KawaseBlurShader.vertexShader,
         fragmentShader: KawaseBlurShader.fragmentShader,
-        glslVersion: THREE.GLSL3
       });
 
       this.fsQuad = new FullScreenQuad(material);
