@@ -23,11 +23,11 @@ via npm
 ## Usage
 
 ```js
-import * as THREE from '//path/to/three.js'
-import { EffectComposer, Pass, FullScreenQuad } from '//path/to/jsm/postprocessing/EffectComposer.js'
-import { RenderPass } from '//path/to/jsm/postprocessing/RenderPass.js'
-import { CopyShader } from '//path/to/jsm/shaders/CopyShader.js'
-import { KawaseBlurPassGen } from '//path/to/three-kawase-blur'
+import * as THREE from 'three'
+import { EffectComposer, Pass, FullScreenQuad } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader'
+import { KawaseBlurPassGen } from 'three-kawase-blur'
 
 ...
 
@@ -45,6 +45,10 @@ const myKawaseBlurPass = new KawaseBlurPass({
 const fx = new EffectComposer(renderer);
 fx.addPass(new RenderPass(scene, camera));
 fx.addPass(myKawaseBlurPass);
+
+// APIs
+myKawaseBlurPass.getKernels(); // [0,1,2,2,3] (a clone)
+myKawaseBlurPass.setKernels([0, 1]); 
 ```
 
 

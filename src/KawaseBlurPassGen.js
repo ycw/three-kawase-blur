@@ -32,55 +32,58 @@ export function KawaseBlurPassGen({ THREE, EffectComposer, Pass, FullScreenQuad,
 
     constructor({ renderer, kernels = [0, 1] }) {
       super();
-      this.kernels = kernels;
-      this.renderer = renderer;
+      this._kernels = kernels;
+      this._renderer = renderer;
 
-      this.internalComposer = new EffectComposer(renderer);
+      this._internalComposer = new EffectComposer(renderer);
       this.setKernels(kernels);
 
-      this.fsQuad = new FullScreenQuad(new THREE.ShaderMaterial({
+      this._fsQuad = new FullScreenQuad(new THREE.ShaderMaterial({
         uniforms: THREE.UniformsUtils.clone(CopyShader.uniforms), 
         vertexShader: CopyShader.vertexShader,
         fragmentShader: CopyShader.fragmentShader
       }));
     }
 
+    getKernels() {
+      return Array.from(this._kernels);
+    }
+
     setKernels(kernels) {
-      const res = this.renderer.getDrawingBufferSize(new THREE.Vector2());
+      const res = this._renderer.getDrawingBufferSize(new THREE.Vector2());
 
       for (const [i, k] of kernels.entries()) {
         const uOffset = new THREE.Vector2().setScalar(.5 + k).divide(res);
-        const pass = this.internalComposer.passes[i];
+        const pass = this._internalComposer.passes[i];
         if (pass) { // reuse 
           pass.uniforms.uOffset.value = uOffset;
         } else {
-          this.internalComposer.addPass(new InternalKawaseBlurPass(uOffset));
+          this._internalComposer.addPass(new InternalKawaseBlurPass(uOffset));
         }
-        this.kernels[i] = k;
       }
 
-      this.internalComposer.passes.length = kernels.length;
-      this.internalComposer.reset();
-      this.kernels.length = kernels.length;
+      this._internalComposer.passes.length = kernels.length;
+      this._internalComposer.reset();
+      this._kernels = Array.from(kernels);
     }
 
     render(renderer, writeBuffer, readBuffer) {
-      this.internalComposer.readBuffer = readBuffer;
-      this.internalComposer.render(renderer);
+      this._internalComposer.readBuffer = readBuffer;
+      this._internalComposer.render(renderer);
 
       if (this.renderToScreen) {
-        this.renderer.setRenderTarget(null);
+        this._renderer.setRenderTarget(null);
       } else {
-        this.renderer.setRenderTarget(writeBuffer);
+        this._renderer.setRenderTarget(writeBuffer);
         if (this.clear) renderer.clear();
       }
-      this.fsQuad.material.uniforms['tDiffuse'].value = this.internalComposer.readBuffer.texture;
-      this.fsQuad.render(renderer);
+      this._fsQuad.material.uniforms['tDiffuse'].value = this._internalComposer.readBuffer.texture;
+      this._fsQuad.render(renderer);
     }
 
     setSize(w, h) {
-      this.internalComposer.setSize(w, h);
-      this.setKernels(this.kernels);
+      this._internalComposer.setSize(w, h);
+      this.setKernels(this._kernels);
     }
 
   };
