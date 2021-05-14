@@ -23,7 +23,6 @@
     import { OrbitControls } from '//cdn.skypack.dev/three@0.128.0/examples/jsm/controls/OrbitControls?min'
     import { EffectComposer, Pass, FullScreenQuad } from '//cdn.skypack.dev/three@0.128.0/examples/jsm/postprocessing/EffectComposer?min'
     import { RenderPass } from '//cdn.skypack.dev/three@0.128.0/examples/jsm/postprocessing/RenderPass?min'
-    import { CopyShader } from '//cdn.skypack.dev/three@0.128.0/examples/jsm/shaders/CopyShader?min'
     import { KawaseBlurPassGen } from '../src/index.js'
     import Tweakpane from '//cdn.skypack.dev/tweakpane';
 
@@ -67,7 +66,7 @@
 
     // ---- effect composer
 
-    const KawaseBlurPass = KawaseBlurPassGen({ THREE, EffectComposer, Pass, FullScreenQuad, CopyShader });
+    const KawaseBlurPass = KawaseBlurPassGen({ THREE, EffectComposer, Pass, FullScreenQuad });
     const kawaseBlurPass = new KawaseBlurPass({ renderer, kernels: [0, 1, 2, 2, 3] });
 
     const fx = new EffectComposer(renderer);

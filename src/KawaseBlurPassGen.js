@@ -1,6 +1,6 @@
 import { KawaseBlurShader } from './KawaseBlurShader.js'
 
-export function KawaseBlurPassGen({ THREE, EffectComposer, Pass, FullScreenQuad, CopyShader }) {
+export function KawaseBlurPassGen({ THREE, EffectComposer, Pass, FullScreenQuad }) {
 
   class InternalKawaseBlurPass extends Pass {
     constructor(uOffset) {

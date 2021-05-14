@@ -26,20 +26,15 @@ via npm
 import * as THREE from 'three'
 import { EffectComposer, Pass, FullScreenQuad } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
-import { CopyShader } from 'three/examples/jsm/shaders/CopyShader'
 import { KawaseBlurPassGen } from 'three-kawase-blur'
 
 ...
 
 // Generate KawaseBlurPass class
-const KawaseBlurPass = KawaseBlurPassGen({
-  THREE, EffectComposer, Pass, FullScreenQuad, CopyShader
-}); 
+const KawaseBlurPass = KawaseBlurPassGen({ THREE, EffectComposer, Pass, FullScreenQuad }); 
 
 // Create KawaseBlurPass instance
-const myKawaseBlurPass = new KawaseBlurPass({ 
-  renderer, kernels: [0, 1, 2, 2, 3] 
-});
+const myKawaseBlurPass = new KawaseBlurPass({ renderer, kernels: [0, 1, 2, 2, 3] });
 
 // Add to EffectComposer 
 const fx = new EffectComposer(renderer);
