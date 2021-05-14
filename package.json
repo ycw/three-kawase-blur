@@ -1,6 +1,6 @@
 {
   "name": "three-kawase-blur",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "ycw (https://github.com/ycw)",
   "repository": "github:ycw/three-kawase-blur",
   "main": "src/index.js",
