@@ -24,7 +24,7 @@
     import { EffectComposer, Pass, FullScreenQuad } from '//cdn.skypack.dev/three@0.128.0/examples/jsm/postprocessing/EffectComposer?min'
     import { RenderPass } from '//cdn.skypack.dev/three@0.128.0/examples/jsm/postprocessing/RenderPass?min'
     import { KawaseBlurPassGen } from '../src/index.js'
-    import Tweakpane from '//cdn.skypack.dev/tweakpane';
+    import { Pane } from '//cdn.skypack.dev/tweakpane@3.0.0';
 
     // ---- params 
 
@@ -75,9 +75,9 @@
 
     // ---- gui
 
-    const tweakpane = new Tweakpane({ title: 'Kawase Blur' });
-    tweakpane.addInput(params, 'kernels');
-    const btn = tweakpane.addButton({ title: 'update' });
+    const pane = new Pane({ title: 'Kawase Blur' });
+    pane.addInput(params, 'kernels');
+    const btn = pane.addButton({ title: 'update' });
 
     function handleKernelsInputChange() {
       if (params.kernels.trim().length === 0) {
@@ -90,7 +90,7 @@
       })) kawaseBlurPass.setKernels(kernels);
     }
 
-    tweakpane.on('change', handleKernelsInputChange);
+    pane.on('change', handleKernelsInputChange);
     btn.on('click', handleKernelsInputChange);
 
     // ----- render loop
